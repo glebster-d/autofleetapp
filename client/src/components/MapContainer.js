@@ -33,11 +33,7 @@ const drawingOptions = {
   drawingControl: true,
   drawingControlOptions: {
     drawingModes: ["rectangle"],
-  },
-  // polygonOptions: {editable: true,
-  //   draggable: true,},
-  // rectangleOptions: {editable: true,
-  //   draggable: true,},
+  },  
 };
 
 function MapContainer({ vehicles, click }) {
