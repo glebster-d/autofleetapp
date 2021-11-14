@@ -127,7 +127,7 @@ function MapContainer({ vehicles, click }) {
 
       {selected ? (
         <InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
+          position={{ lat: selected.location.lat, lng: selected.location.lng }}
           onCloseClick={() => {
             setSelected(null);
           }}>
