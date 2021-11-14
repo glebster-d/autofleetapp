@@ -3,6 +3,7 @@ import { useHttp } from "../hooks/http.hook";
 import {
   // Rectangle,
   // Polygon,
+  InfoWindow,
   DrawingManager,
   GoogleMap,
   Marker,
@@ -46,13 +47,22 @@ function MapContainer({ vehicles, click }) {
     libraries,
   });
 
+  const [selected, setSelected] = useState(null);
   const [polygon, setPolygon] = useState(null);
   const { request } = useHttp();
 
   const mapRef = useRef();
+
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  const onMapClick = useCallback(
+    (event) => {
+      if (polygon) polygon.setMap(null);
+    },
+    [polygon]
+  );
 
   const fetchAllVehicles = useCallback(
     async (data) => {
@@ -67,6 +77,7 @@ function MapContainer({ vehicles, click }) {
   //   console.log("POLY",poly);
   //   if(polygon) polygon.setMap(null)
   //   setPolygon(poly);
+  //   const pathArray = poly.getPath(); // MVCArray<LatLng>
   // };
 
   const onRectangleComplete = (rect) => {
@@ -93,7 +104,8 @@ function MapContainer({ vehicles, click }) {
       zoom={10}
       center={center}
       options={options}
-      onLoad={onMapLoad}>
+      onLoad={onMapLoad}
+      onClick={onMapClick}>
       {vehicles.map((car) => (
         <Marker
           key={car.id}
@@ -107,8 +119,25 @@ function MapContainer({ vehicles, click }) {
             anchor: new window.google.maps.Point(15, 15),
             scaledSize: new window.google.maps.Size(30, 30),
           }}
+          onClick={() => {
+            setSelected(car);
+          }}
         />
       ))}
+
+      {selected ? (
+        <InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }}
+          onCloseClick={() => {
+            setSelected(null);
+          }}>
+          <div>
+            <h2>Car Info:</h2>
+            <p>ID: {selected.id}</p>
+            <p>State: {selected.state}</p>
+          </div>
+        </InfoWindow>
+      ) : null}
 
       <DrawingManager
         options={drawingOptions}
