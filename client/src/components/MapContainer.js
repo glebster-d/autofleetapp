@@ -33,6 +33,13 @@ const drawingOptions = {
   drawingControl: true,
   drawingControlOptions: {
     drawingModes: ["rectangle"],
+  },
+  rectangleOptions: {
+    editable: true,
+    fillOpacity: 0,
+    strokeWeight: 2,
+
+    //   draggable: true,
   },  
 };
 
