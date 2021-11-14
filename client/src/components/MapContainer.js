@@ -35,12 +35,9 @@ const drawingOptions = {
     drawingModes: ["rectangle"],
   },
   rectangleOptions: {
-    editable: true,
     fillOpacity: 0,
     strokeWeight: 2,
-
-    //   draggable: true,
-  },  
+  },
 };
 
 function MapContainer({ vehicles, click }) {
