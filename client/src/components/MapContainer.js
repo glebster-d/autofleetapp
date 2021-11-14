@@ -131,10 +131,10 @@ function MapContainer({ vehicles, click }) {
           onCloseClick={() => {
             setSelected(null);
           }}>
-          <div>
-            <h2>Car Info:</h2>
-            <p>ID: {selected.id}</p>
-            <p>State: {selected.state}</p>
+          <div className="teal lighten-1">
+            <h4>Car Info:</h4>
+            <p><b>ID:</b> {selected.id}</p>
+            <p><b>State:</b> {selected.state}</p>
           </div>
         </InfoWindow>
       ) : null}
